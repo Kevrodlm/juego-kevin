@@ -2,7 +2,7 @@
 #include "Personaje_Model.h"
 
 Bala_Triple_View::Bala_Triple_View() : item_Model() {
-    // Puedes personalizar la carga de textura y configuraciones adicionales aquí
+    
 }
 
 void Bala_Triple_View::disparo(Personaje_Model& personaje) {
