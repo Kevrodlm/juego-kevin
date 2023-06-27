@@ -2,6 +2,7 @@
 
 #include "Personaje_Model.h"
 #include "item_Model.h"
+#include "Bala_Triple_View.h"
 
 #include<ctime>
 #include<stdlib.h>
@@ -15,6 +16,7 @@ int main()
 
     Personaje_Model personaje;//objetos
     item_Model moneda1;
+    Bala_Triple_View powerUpBalaTriple;
 
     moneda1.respawn();//respawn monedita
 
@@ -31,23 +33,23 @@ int main()
             {
                 if (event.key.code == sf::Keyboard::A)
                 {
-                    personaje.mover(sf::Vector2f(-1.f, 0.f));
                     personaje.disparo();
                 }
                 else if (event.key.code == sf::Keyboard::S)
                 {
-                    personaje.mover(sf::Vector2f(0.f, 1.f));
                     personaje.disparo();
                 }
                 else if (event.key.code == sf::Keyboard::D)
                 {
-                    personaje.mover(sf::Vector2f(1.f, 0.f));
                     personaje.disparo();
                 }
                 else if (event.key.code == sf::Keyboard::W)
                 {
-                    personaje.mover(sf::Vector2f(0.f, -1.f));
                     personaje.disparo();
+                }
+                else if (event.key.code == sf::Keyboard::P) // Por ejemplo, P para activar el power up de bala triple
+                {
+                    powerUpBalaTriple.disparo(personaje);
                 }
             }
         }
