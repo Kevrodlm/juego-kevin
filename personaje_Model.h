@@ -26,9 +26,10 @@ public:
     void mover(const sf::Vector2f& direccion);
     const std::vector<Bala>& getBalas() const;
     sf::FloatRect getBounds() const override;
+
+
+    void agregarBala(const Bala& bala);
 };
-
-
 class Jugador : public Personaje_Model
 {
 public:
