@@ -30,16 +30,16 @@ sf::FloatRect Personaje_Model::getHitbox() const {
 
 void Personaje_Model::update() {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-        velocidad.y = -4;
+        mover(sf::Vector2f(0.f, -1.f));
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-        velocidad.x = -4;
+        mover(sf::Vector2f(-1.f, 0.f));
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-        velocidad.y = 4;
+        mover(sf::Vector2f(0.f, 1.f));
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-        velocidad.x = 4;
+        mover(sf::Vector2f(1.f, 0.f));
     }
 
     _sprite.move(velocidad);
@@ -62,7 +62,22 @@ void Personaje_Model::update() {
 }
 
 void Personaje_Model::disparo() {
-    Bala bala(_sprite.getPosition(), sf::Vector2f(1.f, 0.f), 10.f);
+    sf::Vector2f direccion(1.f, 0.f);
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+        direccion = sf::Vector2f(-1.f, 0.f);
+    }
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+        direccion = sf::Vector2f(0.f, 1.f);
+    }
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+        direccion = sf::Vector2f(1.f, 0.f);
+    }
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+        direccion = sf::Vector2f(0.f, -1.f);
+    }
+
+    Bala bala(_sprite.getPosition(), direccion, 10.f);
     _balas.push_back(bala);
 }
 
