@@ -1,73 +1,33 @@
 #pragma once
+
 #include <SFML/Graphics.hpp>
+#include "colisionable_View.h"
+#include "Bala.h"
 
-class Bala;
-
-class Personaje_Model : public sf::Drawable
-{
+class Personaje_Model : public sf::Drawable, public Colision {
+private:
     sf::Sprite _sprite;
     sf::Texture _texture;
-    //modelo
     sf::Vector2f velocidad;
     int vida;
     std::vector<Bala> _balas;
 
 public:
     Personaje_Model();
-
     void setVida(int vida);
     int getVida() const;
     void setPosition(const sf::Vector2f& position);
     sf::Vector2f getPosition() const;
-    //hitbox
     sf::FloatRect getHitbox() const;
-
     void disparo();
     void updateBalas();
-    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
-
+    void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
     void update();
-
-
-    const std::vector<Bala>& getBalas() const {
-        return _balas;
-    }
-
+    void mover(const sf::Vector2f& direccion);
+    const std::vector<Bala>& getBalas() const;
+    sf::FloatRect getBounds() const override;
 };
 
-
-
-class Bala : public sf::Drawable
-{
-private:
-    sf::RectangleShape _shape;
-    sf::Vector2f _direccion;
-    float _velocidad;
-
-public:
-    Bala(const sf::Vector2f& posicionInicial, const sf::Vector2f& direccion, float velocidad)
-        : _direccion(direccion), _velocidad(velocidad)
-    {
-        _shape.setSize(sf::Vector2f(10.f, 10.f));
-        _shape.setFillColor(sf::Color::Red);
-        _shape.setPosition(posicionInicial);
-    }
-
-    void update()
-    {
-        _shape.move(_direccion * _velocidad);
-    }
-
-    sf::Vector2f getPosition() const
-    {
-        return _shape.getPosition();
-    }
-
-    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const
-    {
-        target.draw(_shape, states);
-    }
-};
 
 class Jugador : public Personaje_Model
 {
