@@ -24,4 +24,3 @@ void Bala::draw(sf::RenderTarget& target, sf::RenderStates states) const {
     target.draw(_shape, states);
 }
 
-
